@@ -758,7 +758,21 @@
 
     <!-- Interactive Scripts -->
     <script>
+        function stopAllVideos() {
+            const iframes = document.querySelectorAll('.video-container iframe, iframe');
+            iframes.forEach(iframe => {
+                const src = iframe.getAttribute('src') || '';
+                if (!src) return;
+                const isYouTube = src.includes('youtube.com') || src.includes('youtube-nocookie.com');
+                if (!isYouTube) return;
+                iframe.setAttribute('src', '');
+                setTimeout(() => iframe.setAttribute('src', src), 0);
+            });
+        }
+
         function showGuide(guideId, initialSectionId) {
+            stopAllVideos();
+
             const guides = document.querySelectorAll('.guide');
             guides.forEach(g => g.classList.remove('active'));
             const nextGuide = document.getElementById('guide-' + guideId);
@@ -779,6 +793,8 @@
         }
 
         function showSection(sectionId) {
+            stopAllVideos();
+
             const activeGuide = document.querySelector('.guide.active');
             if (!activeGuide) return;
 
@@ -807,6 +823,8 @@
 
         // Function to handle Tabs within the Analysis Section
         function switchTab(tabId) {
+            stopAllVideos();
+
             // Hide all tab contents
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => {
