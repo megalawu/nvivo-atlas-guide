@@ -12,6 +12,9 @@
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
+        kbd {
+            word-break: break-word;
+        }
         .step-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -369,10 +372,10 @@
             <!-- Tabs for Analysis Types -->
             <div class="mb-8">
                 <div class="border-b border-gray-200">
-                    <nav class="-mb-px flex gap-6" aria-label="Tabs">
-                        <button onclick="switchTab('textSearch')" class="tab-btn w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm border-blue-500 text-blue-600" data-tab="textSearch">Text Search Query</button>
-                        <button onclick="switchTab('wordFrequency')" class="tab-btn w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="wordFrequency">Word Frequency Query</button>
-                        <button onclick="switchTab('matrix')" class="tab-btn w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="matrix">Matrix Coding Query</button>
+                    <nav class="-mb-px flex flex-col sm:flex-row gap-2 sm:gap-6" aria-label="Tabs">
+                        <button onclick="switchTab('textSearch')" class="tab-btn w-full sm:w-1/3 py-3 sm:py-4 px-3 sm:px-1 text-center border-b-2 font-medium text-sm border-blue-500 text-blue-600 rounded-lg sm:rounded-none bg-blue-50 sm:bg-transparent" data-tab="textSearch">Text Search Query</button>
+                        <button onclick="switchTab('wordFrequency')" class="tab-btn w-full sm:w-1/3 py-3 sm:py-4 px-3 sm:px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 rounded-lg sm:rounded-none hover:bg-gray-50 sm:hover:bg-transparent" data-tab="wordFrequency">Word Frequency Query</button>
+                        <button onclick="switchTab('matrix')" class="tab-btn w-full sm:w-1/3 py-3 sm:py-4 px-3 sm:px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 rounded-lg sm:rounded-none hover:bg-gray-50 sm:hover:bg-transparent" data-tab="matrix">Matrix Coding Query</button>
                     </nav>
                 </div>
                 
