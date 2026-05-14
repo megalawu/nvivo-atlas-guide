@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Step-by-Step NVivo & ATLAS.ti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .step-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .content-section.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .nav-link {
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover {
+            color: #2563eb; /* Blue-600 */
+        }
+        .nav-link.active {
+            color: #1d4ed8; /* Blue-700 */
+            font-weight: 600;
+            border-bottom: 2px solid #1d4ed8;
+        }
+        .guide {
+            display: none;
+        }
+        .guide.active {
+            display: block;
+        }
+        .guide-tab.active {
+            background-color: rgba(255, 255, 255, 0.18);
+            border-color: rgba(255, 255, 255, 0.55);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-blue-600 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex flex-col gap-3">
+            <div class="flex items-center justify-between gap-4">
+                <h1 class="text-2xl font-bold tracking-tight">Panduan Step-by-Step NVivo &amp; ATLAS.ti</h1>
+                <div class="flex items-center gap-2">
+                    <button onclick="showGuide('nvivo')" id="guide-btn-nvivo" class="guide-tab active px-3 py-1.5 rounded-lg border border-transparent hover:border-white/50 hover:bg-white/10 transition focus:outline-none">NVivo</button>
+                    <button onclick="showGuide('atlas')" id="guide-btn-atlas" class="guide-tab px-3 py-1.5 rounded-lg border border-transparent hover:border-white/50 hover:bg-white/10 transition focus:outline-none">ATLAS.ti</button>
+                </div>
+            </div>
+            <nav id="subnav-nvivo" class="flex gap-5 overflow-x-auto whitespace-nowrap pb-1">
+                <button onclick="showSection('nvivo-intro')" class="nav-link active hover:text-blue-200 focus:outline-none" data-target="nvivo-intro">Pengenalan</button>
+                <button onclick="showSection('nvivo-setup')" class="nav-link hover:text-blue-200 focus:outline-none" data-target="nvivo-setup">Persiapan</button>
+                <button onclick="showSection('nvivo-coding')" class="nav-link hover:text-blue-200 focus:outline-none" data-target="nvivo-coding">Coding</button>
+                <button onclick="showSection('nvivo-analysis')" class="nav-link hover:text-blue-200 focus:outline-none" data-target="nvivo-analysis">Analisis</button>
+                <button onclick="showSection('nvivo-viz')" class="nav-link hover:text-blue-200 focus:outline-none" data-target="nvivo-viz">Visualisasi</button>
+            </nav>
+            <nav id="subnav-atlas" class="hidden flex gap-5 overflow-x-auto whitespace-nowrap pb-1">
+                <button onclick="showSection('atlas-persiapan')" class="nav-link active hover:text-blue-200 focus:outline-none" data-target="atlas-persiapan">Persiapan</button>
+                <button onclick="showSection('atlas-coding')" class="nav-link hover:text-blue-200 focus:outline-none" data-target="atlas-coding">Coding</button>
+                <button onclick="showSection('atlas-analisis')" class="nav-link hover:text-blue-200 focus:outline-none" data-target="atlas-analisis">Analisis</button>
+                <button onclick="showSection('atlas-networks')" class="nav-link hover:text-blue-200 focus:outline-none" data-target="atlas-networks">Networks</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto px-6 py-10 max-w-5xl">
+        <div id="guide-nvivo" class="guide active">
+
+        <!-- Introduction Section -->
+        <section id="nvivo-intro" class="content-section active">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">Mengapa Menggunakan NVivo?</h2>
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="flex-1">
+                        <p class="text-lg leading-relaxed mb-4">
+                            NVivo adalah perangkat lunak terkemuka untuk penelitian kualitatif dan metode campuran. Software ini dirancang untuk membantu Anda mengatur, menganalisis, dan menemukan wawasan mendalam dalam data yang tidak terstruktur atau kualitatif seperti wawancara, survei terbuka, artikel, konten media sosial, dan video.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            Panduan interaktif ini akan membawa Anda melalui alur kerja (workflow) dasar menggunakan NVivo, mulai dari mengatur proyek hingga memvisualisasikan temuan Anda.
+                        </p>
+                    </div>
+                    <div class="flex-1">
+                        <!-- Placeholder for an illustration/image -->
+                        <div class="bg-blue-50 rounded-lg p-6 border border-blue-100 flex justify-center items-center h-64">
+                            <svg class="w-32 h-32 text-blue-500 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="font-semibold text-xl mb-2 text-blue-700">Organisasi Data</h3>
+                        <p class="text-gray-600">Pusatkan semua data penelitian Anda (dokumen, audio, video) dalam satu platform yang terstruktur.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="font-semibold text-xl mb-2 text-blue-700">Analisis Mendalam</h3>
+                        <p class="text-gray-600">Gunakan fitur coding yang kuat untuk mengidentifikasi tema, pola, dan hubungan dalam data yang kompleks.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="font-semibold text-xl mb-2 text-blue-700">Validitas Temuan</h3>
+                        <p class="text-gray-600">Lacak kembali temuan ke data asli dengan mudah, memperkuat transparansi dan rigor penelitian Anda.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Persiapan & Import Section -->
+        <section id="nvivo-setup" class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Fase 1: Persiapan & Import Data</h2>
+            
+            <div class="space-y-8">
+                <!-- Step 1 -->
+                <div class="step-card bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">1</div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3">Membuat Proyek Baru</h3>
+                        <p class="text-gray-600 mb-4">Langkah pertama adalah membuat ruang kerja digital untuk penelitian Anda.</p>
+                        <ol class="list-decimal list-inside text-gray-700 space-y-3 ml-2">
+                            <li>Buka aplikasi NVivo di komputer Anda.</li>
+                            <li>Pada layar awal (Welcome Screen), klik tombol <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">Blank Project</kbd>.</li>
+                            <li>Jendela <em>New Project</em> akan muncul. Ketik judul proyek Anda pada kolom <strong>Title</strong>.</li>
+                            <li>(Opsional) Isi kolom <strong>Description</strong>.</li>
+                            <li>Klik <kbd class="px-2 py-1 bg-blue-600 text-white border border-blue-700 rounded shadow-sm font-sans font-semibold">OK</kbd> atau <kbd class="px-2 py-1 bg-blue-600 text-white border border-blue-700 rounded shadow-sm font-sans font-semibold">Create</kbd> (tergantung versi NVivo).</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3">Import Sumber Data (Files)</h3>
+                        <p class="text-gray-600 mb-4">Langkah memasukkan file wawancara atau dokumen ke dalam proyek:</p>
+                        <ol class="list-decimal list-inside text-gray-700 space-y-3 ml-2">
+                            <li>Di panel navigasi kiri, pastikan Anda berada di area <strong>Data</strong> &gt; <strong>Files</strong>.</li>
+                            <li>Pergi ke menu pita (Ribbon) di bagian atas layar, klik tab <kbd class="px-2 py-1 bg-blue-50 border border-blue-200 rounded text-blue-700 font-sans font-semibold">Import</kbd>.</li>
+                            <li>Klik ikon <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">Files</kbd> (ikon berbentuk kertas/dokumen).</li>
+                            <li>Jendela browser file komputer akan terbuka. Cari dan pilih file (Word, PDF, dll) yang ingin di-import.</li>
+                            <li>Klik <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">Open</kbd>, lalu klik <kbd class="px-2 py-1 bg-blue-600 text-white border border-blue-700 rounded shadow-sm font-sans font-semibold">Import</kbd> pada kotak dialog yang muncul.</li>
+                        </ol>
+                        <div class="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 text-sm">
+                            <strong>Tips:</strong> Klik kanan di area putih pada panel Files, pilih <kbd class="px-2 py-0.5 bg-white border border-gray-300 rounded text-xs font-semibold">New Folder</kbd> untuk membuat folder pengelompokan (misal: Wawancara, Literatur).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">3</div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3">Import Audio/Video + (Opsional) Transcript</h3>
+                        <p class="text-gray-600 mb-4">Jika data Anda berupa rekaman, NVivo bisa menyimpan media dan (jika tersedia) transkripnya untuk memudahkan coding.</p>
+                        <ol class="list-decimal list-inside text-gray-700 space-y-3 ml-2">
+                            <li>Masuk ke <strong>Data</strong> &gt; <strong>Files</strong> lalu klik tab <kbd class="px-2 py-1 bg-blue-50 border border-blue-200 rounded text-blue-700 font-sans font-semibold">Import</kbd>.</li>
+                            <li>Pilih <strong>Audio</strong> atau <strong>Video</strong>, lalu pilih file rekaman Anda.</li>
+                            <li>Jika Anda punya transkrip (Word), import transkripnya sebagai file terpisah.</li>
+                            <li>Gunakan fitur <strong>Transcription/Sync</strong> (nama menu bisa berbeda antar versi) untuk menautkan transkrip dengan media.</li>
+                        </ol>
+                        <div class="mt-4 p-3 bg-indigo-50 border-l-4 border-indigo-400 text-indigo-800 text-sm">
+                            <strong>Catatan:</strong> Nama menu bisa berbeda antar NVivo Windows/Mac. Prinsipnya sama: simpan media, lalu tautkan/selaraskan transkrip agar kutipan bisa diputar ulang saat membaca.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-6">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xl">4</div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-3">Membuat Cases & Memberi Atribut (Untuk Perbandingan)</h3>
+                        <p class="text-gray-600 mb-4">Kasus (Cases) memodelkan unit analisis (misal: responden). Atribut (umur, gender, lokasi) membuat Anda bisa membandingkan tema antar kelompok.</p>
+                        <ol class="list-decimal list-inside text-gray-700 space-y-3 ml-2">
+                            <li>Siapkan daftar unit analisis (misal: Responden 1, Responden 2).</li>
+                            <li>Di panel navigasi, cari area <strong>Cases</strong> (atau <strong>Codes</strong> &gt; <strong>Cases</strong> tergantung versi).</li>
+                            <li>Buat Case untuk tiap unit (klik <strong>Create</strong> &gt; <strong>Case</strong> atau klik kanan &gt; New).</li>
+                            <li>Buat <strong>Case Classification</strong> (misal: “Responden”) dan tambahkan field atribut (misal: Umur, Gender, Profesi).</li>
+                            <li>Isi atribut pada setiap Case, lalu tautkan Case ke sumber data (transkrip) agar analisis matriks berjalan.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coding Section -->
+        <section id="nvivo-coding" class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Fase 2: Proses Coding (Pengkodean)</h2>
+            <p class="text-center text-gray-600 max-w-2xl mx-auto mb-10">Coding adalah jantung dari analisis kualitatif. Ini adalah proses menandai segmen data dengan 'Node' (atau 'Code') yang mewakili tema, konsep, atau ide tertentu.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Concept Card -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path></svg>
+                        <h3 class="text-xl font-bold">Membuat Codes (Pengkodean)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Cara menandai teks secara spesifik:</p>
+                    <ol class="list-decimal list-inside text-gray-700 space-y-3">
+                        <li>Klik dua kali pada file dokumen di area <em>Files</em> untuk membukanya di layar kerja (Detail View).</li>
+                        <li>Gunakan mouse untuk <strong>memblok (highlight)</strong> kalimat yang penting.</li>
+                        <li><strong>Klik kanan</strong> pada teks yang diblok tersebut.</li>
+                        <li>Pilih <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">Code...</kbd> atau <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">Code Selection</kbd>.</li>
+                        <li>Pilih opsi <strong>New Node</strong> (atau <em>Top Level Code</em>).</li>
+                        <li>Ketik nama tema di kolom <em>Name</em> (misal: "Kecepatan Layanan"), lalu klik <kbd class="px-2 py-1 bg-blue-600 text-white rounded shadow-sm font-sans font-semibold">OK</kbd>.</li>
+                    </ol>
+                </div>
+
+                <!-- Concept Card -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="w-8 h-8 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                        <h3 class="text-xl font-bold">Membangun Hirarki (Parent/Child)</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Cara mengatur Node ke dalam folder hirarki:</p>
+                    <ol class="list-decimal list-inside text-gray-700 space-y-3">
+                        <li>Di panel navigasi kiri, klik folder <strong>Codes</strong> &gt; <strong>Nodes</strong> (atau sekadar <em>Codes</em> di versi baru).</li>
+                        <li>Anda akan melihat daftar semua Node yang sudah dibuat.</li>
+                        <li>Klik dan <strong>tahan klik (hold)</strong> pada Node anak (misal: "Kesopanan").</li>
+                        <li><strong>Geser (drag)</strong> dan <strong>lepaskan (drop)</strong> tepat di atas teks Node induk (misal: "Kualitas Layanan").</li>
+                        <li>Sekarang "Kesopanan" akan menjorok ke dalam sebagai sub-tema di bawah "Kualitas Layanan".</li>
+                    </ol>
+                </div>
+
+                <!-- New Memo Card (Menyesuaikan dengan Silver & Lewins) -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 md:col-span-2 border-l-4 border-l-amber-400">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        <h3 class="text-xl font-bold">Memos & Annotations (Catatan Analitik)</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6 mt-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-2">Cara Membuat Memo:</h4>
+                            <ol class="list-decimal list-inside text-gray-700 space-y-2 text-sm">
+                                <li>Di menu Ribbon atas, klik tab <kbd class="px-2 py-1 bg-blue-50 border border-blue-200 rounded text-blue-700 font-sans font-semibold">Create</kbd>.</li>
+                                <li>Klik ikon <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">Memo</kbd>.</li>
+                                <li>Ketik nama memo (misal: "Jurnal Riset Hari 1"), klik OK.</li>
+                                <li>Sebuah dokumen kosong terbuka, silakan ketik refleksi atau pemikiran teoritis Anda di situ.</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-2">Cara Membuat Annotation:</h4>
+                            <ol class="list-decimal list-inside text-gray-700 space-y-2 text-sm">
+                                <li>Buka transkrip wawancara, blok kata/kalimat yang membingungkan atau menarik.</li>
+                                <li>Klik kanan pada teks yang diblok &gt; pilih <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">New Annotation</kbd>.</li>
+                                <li>Ketik catatan singkat Anda di panel biru yang muncul di bagian bawah layar. Teks asli akan ditandai dengan warna biru.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Card -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 md:col-span-2">
+                    <h3 class="text-xl font-bold mb-4 border-b pb-2">Fitur Canggih: Auto Coding</h3>
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="flex-1 text-gray-700">
+                            <p class="mb-3">Untuk dataset besar (seperti hasil survei ekstensif atau sentimen media sosial), gunakan fitur otomatisasi untuk menghemat waktu:</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li><strong>Auto Code by Theme/Sentiment:</strong> NVivo dapat mendeteksi tema umum secara otomatis (khusus versi Plus/Windows).</li>
+                                <li><strong>Auto Code by Structure:</strong> Sangat berguna untuk transkrip wawancara yang menggunakan Heading 1 untuk pertanyaan, Heading 2 untuk jawaban, sehingga memisahkan respons berdasarkan pertanyaan dengan cepat.</li>
+                            </ul>
+                        </div>
+                        <div class="flex-1 bg-gray-50 p-4 rounded-lg flex items-center justify-center">
+                            <p class="text-sm text-gray-500 italic text-center">"Coding manual memberikan kedalaman konteks, Auto coding memberikan kecepatan eksplorasi awal."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 md:col-span-2 border-l-4 border-l-sky-400">
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg class="w-8 h-8 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m0-4v4m0-4a4 4 0 10-8 0v4a4 4 0 108 0"></path></svg>
+                        <h3 class="text-xl font-bold">Coding di Audio/Video (Jika Data Berupa Rekaman)</h3>
+                    </div>
+                    <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                        <li>Buka file audio/video di <strong>Files</strong>.</li>
+                        <li>Putar media, lalu pilih rentang waktu atau teks transkrip yang relevan (jika transkrip sudah ditautkan).</li>
+                        <li>Klik kanan &gt; <strong>Code</strong> ke Node yang sesuai atau buat Node baru.</li>
+                        <li>Gunakan <strong>Annotations</strong> untuk mencatat konteks (intonasi, jeda, emosi) yang tidak tertangkap oleh teks.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analisis Section -->
+        <section id="nvivo-analysis" class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Fase 3: Eksplorasi & Analisis Lanjutan</h2>
+            <p class="text-gray-600 mb-8">Setelah data dikodekan, saatnya bertanya pada data Anda menggunakan fitur <strong>Queries</strong>.</p>
+
+            <!-- Tabs for Analysis Types -->
+            <div class="mb-8">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex gap-6" aria-label="Tabs">
+                        <button onclick="switchTab('textSearch')" class="tab-btn w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm border-blue-500 text-blue-600" data-tab="textSearch">Text Search Query</button>
+                        <button onclick="switchTab('wordFrequency')" class="tab-btn w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="wordFrequency">Word Frequency Query</button>
+                        <button onclick="switchTab('matrix')" class="tab-btn w-1/3 py-4 px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="matrix">Matrix Coding Query</button>
+                    </nav>
+                </div>
+                
+                <div class="mt-6 bg-white p-6 rounded-lg shadow-sm border border-gray-100 min-h-[250px]">
+                    <!-- Tab Content: Text Search -->
+                    <div id="textSearch" class="tab-content block">
+                        <h4 class="text-xl font-bold mb-3 text-gray-800">Langkah Text Search Query</h4>
+                        <ol class="list-decimal list-inside text-gray-700 space-y-3 mb-4">
+                            <li>Pada menu Ribbon atas, klik tab <kbd class="px-2 py-1 bg-blue-50 border border-blue-200 rounded text-blue-700 font-sans font-semibold">Explore</kbd>.</li>
+                            <li>Klik ikon <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">Text Search</kbd> (ikon kaca pembesar).</li>
+                            <li>Pada jendela tab yang muncul, ketik kata yang ingin dicari di kolom <strong>Search for:</strong>.</li>
+                            <li>(Opsional) Geser slider <em>Finding matches</em> ke kanan (ke arah "Stemmed words" atau "Synonyms") jika ingin pencarian yang lebih luas.</li>
+                            <li>Klik tombol <kbd class="px-2 py-1 bg-green-50 border border-green-300 text-green-700 rounded shadow-sm font-sans font-semibold">Run Query</kbd> di bagian atas.</li>
+                            <li>Hasil teks yang mengandung kata tersebut akan muncul. Untuk menjadikannya Node, klik tombol <strong>Save Results</strong> di ribbon atas.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Tab Content: Word Frequency -->
+                    <div id="wordFrequency" class="tab-content hidden">
+                        <h4 class="text-xl font-bold mb-3 text-gray-800">Langkah Word Frequency Query</h4>
+                        <ol class="list-decimal list-inside text-gray-700 space-y-3 mb-4">
+                            <li>Pada menu Ribbon atas, klik tab <kbd class="px-2 py-1 bg-blue-50 border border-blue-200 rounded text-blue-700 font-sans font-semibold">Explore</kbd>.</li>
+                            <li>Klik ikon <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">Word Frequency</kbd>.</li>
+                            <li>Biarkan default pengaturan (untuk mencari di semua file), lalu klik tombol <kbd class="px-2 py-1 bg-green-50 border border-green-300 text-green-700 rounded shadow-sm font-sans font-semibold">Run Query</kbd>.</li>
+                            <li>Daftar kata yang sering muncul akan dimuat. Untuk melihat visualnya, klik tab <strong>Word Cloud</strong> di sebelah kanan atas area hasil pencarian.</li>
+                            <li><strong>Tips:</strong> Jika muncul kata seperti "yang" atau "dan", klik kanan pada kata tersebut di tabel hasil &gt; pilih <strong>Add to Stop Words List</strong> &gt; klik OK, lalu klik Run Query lagi.</li>
+                        </ol>
+                    </div>
+
+                    <!-- Tab Content: Matrix -->
+                    <div id="matrix" class="tab-content hidden">
+                        <h4 class="text-xl font-bold mb-3 text-gray-800">Langkah Matrix Coding Query</h4>
+                        <ol class="list-decimal list-inside text-gray-700 space-y-3 mb-4">
+                            <li>Pada menu Ribbon atas, klik tab <kbd class="px-2 py-1 bg-blue-50 border border-blue-200 rounded text-blue-700 font-sans font-semibold">Explore</kbd>.</li>
+                            <li>Klik ikon <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded shadow-sm font-sans font-semibold">Matrix Coding</kbd>.</li>
+                            <li>Pada pengaturan <strong>Rows</strong> (Baris), klik tombol <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded font-sans font-bold">+</kbd> lalu pilih <strong>Select Items...</strong>. Centang Nodes (Tema) yang ingin dibandingkan, klik OK.</li>
+                            <li>Pada pengaturan <strong>Columns</strong> (Kolom), klik tombol <kbd class="px-2 py-1 bg-gray-100 border border-gray-300 rounded font-sans font-bold">+</kbd> lalu pilih <strong>Select Items...</strong>. Centang Atribut Demografi atau Cases, klik OK.</li>
+                            <li>Klik <kbd class="px-2 py-1 bg-green-50 border border-green-300 text-green-700 rounded shadow-sm font-sans font-semibold">Run Query</kbd>.</li>
+                            <li>Tabel matriks dengan angka silang akan muncul. Anda bisa klik dua kali (double-click) pada salah satu angka di tabel untuk langsung melihat kutipan aslinya.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Case Classification Info -->
+                <h3 class="text-lg font-bold text-indigo-900 mb-2">Penting: Gunakan "Cases" dan "Classifications"</h3>
+                <p class="text-indigo-800 mb-2">Agar analisis Anda lebih bermakna, ubah narasumber/unit analisis Anda menjadi <strong>Cases</strong>. Kemudian, berikan atribut pada Cases tersebut menggunakan <strong>Case Classifications</strong> (misal: Case = Responden 1; Atribut = Umur 25, Profesi Guru).</p>
+                <p class="text-sm text-indigo-700">Ini adalah syarat wajib agar Anda bisa melakukan Matrix Coding Query untuk membandingkan demografi!</p>
+            </div>
+        </section>
+
+        <!-- Visualisasi Section -->
+        <section id="nvivo-viz" class="content-section">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Fase 4: Visualisasi & Pelaporan</h2>
+            <p class="text-gray-600 mb-8">Memvisualisasikan data kualitatif membantu menemukan pola baru dan mempresentasikan temuan Anda secara menarik di laporan akhir.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Viz 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group">
+                    <div class="h-40 bg-gray-100 relative flex items-center justify-center p-4">
+                        <!-- Abstract Representation of Word Cloud -->
+                        <div class="text-center">
+                            <span class="text-3xl font-bold text-blue-600 mr-2">Inovasi</span>
+                            <span class="text-xl text-green-500 mr-2">Cepat</span>
+                            <span class="text-sm text-gray-500 block">Kualitas</span>
+                            <span class="text-2xl text-purple-500 ml-4">Solusi</span>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2 group-hover:text-blue-600 transition-colors">Word Cloud</h3>
+                        <p class="text-sm text-gray-600">Representasi visual dari frekuensi kata. Kata yang lebih besar berarti lebih sering muncul.</p>
+                    </div>
+                </div>
+
+                <!-- Viz 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group">
+                    <div class="h-40 bg-gray-100 relative flex items-center justify-center p-4">
+                        <!-- Abstract Representation of Chart -->
+                         <div class="flex items-end gap-2 h-24">
+                            <div class="w-8 bg-blue-400 h-full rounded-t"></div>
+                            <div class="w-8 bg-blue-500 h-3/4 rounded-t"></div>
+                            <div class="w-8 bg-blue-600 h-1/2 rounded-t"></div>
+                         </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2 group-hover:text-blue-600 transition-colors">Charts (Grafik)</h3>
+                        <p class="text-sm text-gray-600">Buat grafik batang atau pie untuk menunjukkan jumlah referensi coding pada Node tertentu, atau untuk melihat demografi (Cases).</p>
+                    </div>
+                </div>
+
+                <!-- Viz 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group">
+                    <div class="h-40 bg-gray-100 relative flex items-center justify-center p-4">
+                        <!-- Abstract Representation of Mind Map -->
+                        <svg class="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2 group-hover:text-blue-600 transition-colors">Mind Maps & Concept Maps</h3>
+                        <p class="text-sm text-gray-600">Alat brainstorming di dalam NVivo. Mind Map untuk ide awal, Concept Map untuk menghubungkan teori dan temuan antar Nodes.</p>
+                    </div>
+                </div>
+                 <!-- Viz 4 -->
+                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group">
+                    <div class="h-40 bg-gray-100 relative flex items-center justify-center p-4">
+                        <!-- Abstract Representation of Hierarchy Chart -->
+                        <div class="w-full h-full flex flex-col gap-1">
+                            <div class="w-full h-1/2 bg-indigo-300 rounded"></div>
+                            <div class="w-full h-1/2 flex gap-1">
+                                <div class="w-2/3 h-full bg-indigo-400 rounded"></div>
+                                <div class="w-1/3 h-full bg-indigo-500 rounded"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-bold text-lg mb-2 group-hover:text-blue-600 transition-colors">Hierarchy Charts (Tree Map)</h3>
+                        <p class="text-sm text-gray-600">Kotak-kotak bersarang yang ukurannya menunjukkan jumlah coding. Sangat bagus untuk membandingkan dominansi antar tema (Nodes).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <p class="text-gray-700 mb-4">Semua visualisasi dapat di-eksport (sebagai gambar atau tabel) untuk dimasukkan ke laporan.</p>
+                <div class="bg-white border border-gray-100 rounded-xl shadow-sm p-6 text-left max-w-2xl mx-auto">
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Checklist Ekspor yang Paling Sering Dipakai</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                        <li>Ekspor visual (word cloud, chart, map): cari tombol <strong>Export</strong> di ribbon pada tampilan visual.</li>
+                        <li>Ekspor daftar Nodes/Codes: buka daftar Nodes &gt; gunakan <strong>Export List</strong> (jika tersedia) atau salin tabel.</li>
+                        <li>Ekspor hasil query (Text Search/Matrix): dari hasil query &gt; <strong>Save</strong>/<strong>Export</strong> untuk disimpan sebagai item proyek atau file.</li>
+                        <li>Ekspor kutipan (coded references): buka Node &gt; tampilkan referensi &gt; simpan/ekspor sebagai dokumen untuk lampiran.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        </div>
+
+        <div id="guide-atlas" class="guide">
+            <section id="atlas-persiapan" class="content-section active">
+                <div class="mb-8 text-center">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Fase 1: Persiapan Proyek & Dokumen (ATLAS.ti)</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto">Langkah awal untuk memulai riset Anda di ATLAS.ti. Dalam ATLAS.ti, sumber data Anda disebut sebagai “Documents”.</p>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-2">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">1</div>
+                            <h3 class="text-xl font-bold">Membuat Proyek Baru</h3>
+                        </div>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-3">
+                            <li>Buka aplikasi ATLAS.ti.</li>
+                            <li>Pada layar Welcome, klik <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">Create New Project</kbd>.</li>
+                            <li>Masukkan <strong>Project Name</strong> dan (opsional) <strong>Comment</strong>.</li>
+                            <li>Klik <kbd class="px-2 py-1 bg-red-600 text-white border border-red-700 rounded shadow-sm font-semibold">Create</kbd>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center font-bold">2</div>
+                            <h3 class="text-xl font-bold">Menambahkan Dokumen (Import)</h3>
+                        </div>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-3">
+                            <li>Buka tab <kbd class="px-2 py-1 bg-slate-100 border border-slate-200 rounded text-slate-700 font-semibold">Home</kbd>.</li>
+                            <li>Klik <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">Add Documents</kbd> &gt; pilih <strong>Add Files...</strong>.</li>
+                            <li>Pilih file (Word, PDF, audio, video) &gt; klik <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">Open</kbd>.</li>
+                            <li>Dokumen muncul di area <em>Project Explorer</em> di sebelah kiri.</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 md:col-span-2 border-l-4 border-l-blue-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                            <h3 class="text-xl font-bold">Membuat Document Groups (Pengelompokan Data)</h3>
+                        </div>
+                        <p class="text-slate-600 mb-3 text-sm">Kelompokkan dokumen (misal: Pria vs Wanita, Wawancara vs Literatur) agar analisis perbandingan lebih mudah.</p>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-2 text-sm">
+                            <li>Klik <strong>Documents</strong> untuk membuka Document Manager.</li>
+                            <li>Klik kanan di area group &gt; <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded font-semibold">New Group</kbd> &gt; beri nama.</li>
+                            <li>Pilih dokumen di daftar &gt; <strong>drag and drop</strong> ke group yang sesuai.</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 md:col-span-2 border-l-4 border-l-emerald-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <svg class="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V6m0 12v-2"></path></svg>
+                            <h3 class="text-xl font-bold">Menambahkan Document Variables (Atribut Dokumen)</h3>
+                        </div>
+                        <p class="text-slate-600 mb-3 text-sm">Jika Anda ingin membandingkan tema antar kelompok, buat variabel seperti Gender, Usia, atau Lokasi pada dokumen/responden.</p>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-2 text-sm">
+                            <li>Buka Document Manager, lalu cari menu <strong>Document Variables</strong> (nama bisa berbeda antar versi).</li>
+                            <li>Buat variabel (misal: Gender) dan pilih tipe nilainya (teks/angka).</li>
+                            <li>Isi nilai variabel untuk tiap dokumen agar bisa dipakai di tabel analisis.</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section id="atlas-coding" class="content-section">
+                <div class="mb-8 text-center">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Fase 2: Proses Coding & Memos (ATLAS.ti)</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto">Coding memecah data dengan memberi label (Codes) pada kutipan (Quotations) yang relevan.</p>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-2">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <span class="text-red-500">■</span> Open Coding (Membuat Code Baru)
+                        </h3>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-3">
+                            <li>Buka dokumen dari <em>Project Explorer</em>.</li>
+                            <li>Blok teks penting (ini menjadi <em>Quotation</em>).</li>
+                            <li>Klik kanan &gt; <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">Open Coding</kbd>.</li>
+                            <li>Ketik nama code &gt; klik <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">Create</kbd>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                            <span class="text-red-500">■</span> List Coding & In-Vivo
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-semibold text-sm mb-1">List Coding (pakai code yang sudah ada):</p>
+                                <ol class="list-decimal list-inside text-slate-700 text-sm space-y-1">
+                                    <li>Blok teks &gt; klik kanan &gt; <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">List Coding</kbd>.</li>
+                                    <li>Pilih code dari daftar &gt; OK.</li>
+                                </ol>
+                            </div>
+                            <hr class="border-slate-100">
+                            <div>
+                                <p class="font-semibold text-sm mb-1">Code In-Vivo (kata asli jadi nama code):</p>
+                                <ol class="list-decimal list-inside text-slate-700 text-sm space-y-1">
+                                    <li>Blok kata/frasa penting.</li>
+                                    <li>Klik kanan &gt; <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">Code in Vivo</kbd>.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 md:col-span-2 border-l-4 border-l-amber-500">
+                        <div class="flex items-center gap-3 mb-4">
+                            <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                            <h3 class="text-xl font-bold">Menulis Memos & Menautkannya</h3>
+                        </div>
+                        <p class="text-slate-600 mb-3 text-sm">Gunakan memos untuk mencatat ide teoretis dan keputusan analitik agar jejak analisis jelas.</p>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <ol class="list-decimal list-inside text-slate-700 text-sm space-y-2 bg-amber-50 p-3 rounded">
+                                <li class="font-semibold text-slate-800">Membuat Memo Baru:</li>
+                                <li>Pada tab <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">Home</kbd>, buka menu <strong>Memos</strong>.</li>
+                                <li>Pilih <strong>Create Free Memo</strong> &gt; beri nama &gt; tulis catatan Anda.</li>
+                            </ol>
+                            <ol class="list-decimal list-inside text-slate-700 text-sm space-y-2 bg-amber-50 p-3 rounded">
+                                <li class="font-semibold text-slate-800">Menautkan Memo (Linking):</li>
+                                <li>Klik sebuah quotation atau code di margin.</li>
+                                <li>Dari panel <em>Memos</em>, <strong>drag and drop</strong> memo ke quotation/code.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 md:col-span-2 border-l-4 border-l-sky-500">
+                        <div class="flex items-center gap-3 mb-3">
+                            <svg class="w-6 h-6 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <h3 class="text-xl font-bold">Mengelola Daftar Code (Rename, Merge, Group)</h3>
+                        </div>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-2 text-sm">
+                            <li>Buka <strong>Code Manager</strong> untuk melihat semua code.</li>
+                            <li>Rapikan nama: gunakan rename agar konsisten (misal: kata benda, bentuk tunggal).</li>
+                            <li>Jika ada duplikasi, gunakan merge (gabung) agar tidak terpecah.</li>
+                            <li>Buat <strong>Code Groups</strong> untuk menyusun tema (misal: “Hambatan”, “Dukungan”, “Strategi”).</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section id="atlas-analisis" class="content-section">
+                <div class="mb-8 text-center">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Fase 3: Analisis & Queries (ATLAS.ti)</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto">Cari pola, frekuensi kata, dan analisis persinggungan antar tema (co-occurrence).</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold mb-3">1. Word Cloud / Word Frequencies</h3>
+                        <p class="text-sm text-slate-600 mb-3">Melihat kata yang sering muncul untuk eksplorasi awal.</p>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-2">
+                            <li>Buka tab <kbd class="px-2 py-1 bg-slate-100 border border-slate-200 rounded font-semibold">Analyze</kbd>.</li>
+                            <li>Klik <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">Word Frequencies</kbd>.</li>
+                            <li>Pilih dokumen/group yang dianalisis, lalu tampilkan word cloud.</li>
+                            <li>Tambahkan kata umum ke stop list agar hasil lebih bersih.</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-bold mb-3">2. Code Co-occurrence Explorer</h3>
+                        <p class="text-sm text-slate-600 mb-3">Menganalisis keterkaitan tema: di mana dua code muncul bersama.</p>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-2">
+                            <li>Buka tab <kbd class="px-2 py-1 bg-slate-100 border border-slate-200 rounded font-semibold">Analyze</kbd>.</li>
+                            <li>Pilih <kbd class="px-2 py-1 bg-slate-100 border border-slate-300 rounded shadow-sm font-semibold">Code Co-occurrence Explorer</kbd>.</li>
+                            <li>Pilih code untuk baris dan kolom, lalu baca sel matriksnya.</li>
+                            <li>Klik sel berangka untuk membuka kutipan aslinya.</li>
+                        </ol>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-indigo-500">
+                        <h3 class="text-xl font-bold mb-3">3. Query Tool (Pencarian Pola/Aturan)</h3>
+                        <p class="text-sm text-slate-600 mb-3">Gunakan query untuk mencari segmen yang memenuhi kriteria (misal: Code A AND Code B, atau Code A dalam kelompok dokumen tertentu).</p>
+                        <ol class="list-decimal list-inside text-slate-700 space-y-2">
+                            <li>Buka tab <strong>Analyze</strong> &gt; pilih <strong>Query Tool</strong>.</li>
+                            <li>Susun aturan (AND/OR/NOT), pilih cakupan dokumen/group.</li>
+                            <li>Jalankan query, lalu simpan hasil sebagai output atau item analisis.</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <section id="atlas-networks" class="content-section">
+                <div class="mb-8 text-center">
+                    <h2 class="text-3xl font-bold text-slate-800 mb-4">Fase 4: Networks (Peta Konsep) (ATLAS.ti)</h2>
+                    <p class="text-slate-600 max-w-2xl mx-auto">ATLAS.ti unggul dalam networks untuk memvisualisasikan hubungan antar codes, memos, dan dokumen.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-4 mb-6 pb-4 border-b border-slate-100">
+                        <div class="w-16 h-16 bg-slate-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-slate-800">Langkah Membuat Network</h3>
+                            <p class="text-slate-500">Membangun model teoretis visual dari temuan.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-lg mb-3">Tahap 1: Membuka Canvas</h4>
+                            <ol class="list-decimal list-inside text-slate-700 space-y-3">
+                                <li>Buka tab <kbd class="px-2 py-1 bg-slate-100 border border-slate-200 rounded font-semibold">Home</kbd>.</li>
+                                <li>Buka menu <strong>Networks</strong> &gt; pilih <strong>New Network</strong>.</li>
+                                <li>Beri nama network, lalu kanvas kosong terbuka.</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg mb-3">Tahap 2: Menarik Node & Membuat Relasi</h4>
+                            <ol class="list-decimal list-inside text-slate-700 space-y-3">
+                                <li>Buka panel codes/memos/dokumen yang ingin dipetakan.</li>
+                                <li><strong>Drag and drop</strong> item ke kanvas.</li>
+                                <li>Tarik konektor dari satu node ke node lain, lalu pilih jenis relasinya.</li>
+                                <li>Tambahkan label relasi agar argumentasi teoretis lebih jelas.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 p-4 bg-slate-50 rounded border border-slate-200 text-sm text-slate-600">
+                        <strong>Ekspor:</strong> Simpan network sebagai gambar untuk laporan dengan menu <strong>Export</strong> &gt; <strong>Save as Image</strong> (nama menu bisa berbeda antar versi).
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2026 Panduan Interaktif NVivo &amp; ATLAS.ti. Dibuat dengan Tailwind CSS &amp; JavaScript.</p>
+            <p class="text-sm mt-2">Catatan: Antarmuka spesifik dapat berbeda tergantung versi software dan sistem operasi.</p>
+            <p class="text-sm mt-2">Referensi: SAGE Study (NVivo 10 &amp; ATLAS.ti) — <a class="underline hover:text-white" href="https://study.sagepub.com/using-software-in-qualitative-research/student-resources/step-by-step-software-guides/nvivo-10" target="_blank" rel="noopener noreferrer">NVivo</a> dan <a class="underline hover:text-white" href="https://study.sagepub.com/using-software-in-qualitative-research/student-resources/step-by-step-software-guides/atlasti" target="_blank" rel="noopener noreferrer">ATLAS.ti</a>.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        function showGuide(guideId, initialSectionId) {
+            const guides = document.querySelectorAll('.guide');
+            guides.forEach(g => g.classList.remove('active'));
+            const nextGuide = document.getElementById('guide-' + guideId);
+            if (nextGuide) nextGuide.classList.add('active');
+
+            const btnNvivo = document.getElementById('guide-btn-nvivo');
+            const btnAtlas = document.getElementById('guide-btn-atlas');
+            btnNvivo.classList.toggle('active', guideId === 'nvivo');
+            btnAtlas.classList.toggle('active', guideId === 'atlas');
+
+            const subNvivo = document.getElementById('subnav-nvivo');
+            const subAtlas = document.getElementById('subnav-atlas');
+            subNvivo.classList.toggle('hidden', guideId !== 'nvivo');
+            subAtlas.classList.toggle('hidden', guideId !== 'atlas');
+
+            const defaultSection = guideId === 'nvivo' ? 'nvivo-intro' : 'atlas-persiapan';
+            showSection(initialSectionId || defaultSection);
+        }
+
+        function showSection(sectionId) {
+            const activeGuide = document.querySelector('.guide.active');
+            if (!activeGuide) return;
+
+            const sections = activeGuide.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            const target = document.getElementById(sectionId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            const activeSubnav = document.getElementById('subnav-nvivo').classList.contains('hidden')
+                ? document.getElementById('subnav-atlas')
+                : document.getElementById('subnav-nvivo');
+
+            const navLinks = activeSubnav.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active', 'border-b-2', 'border-blue-700');
+                if (link.getAttribute('data-target') === sectionId) {
+                    link.classList.add('active');
+                    if (window.innerWidth > 768) link.classList.add('border-b-2', 'border-blue-700');
+                }
+            });
+        }
+
+        // Function to handle Tabs within the Analysis Section
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('block');
+                content.classList.add('hidden');
+            });
+
+            // Reset all tab buttons styling
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('border-blue-500', 'text-blue-600');
+                btn.classList.add('border-transparent', 'text-gray-500');
+            });
+
+            // Show selected content
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(tabId).classList.add('block');
+
+            // Highlight active button
+            const activeBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
+            if(activeBtn) {
+                activeBtn.classList.remove('border-transparent', 'text-gray-500');
+                activeBtn.classList.add('border-blue-500', 'text-blue-600');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const hashId = (window.location.hash || '').replace('#', '');
+            const hashEl = hashId ? document.getElementById(hashId) : null;
+            if (hashEl) {
+                const guideRoot = hashEl.closest('.guide');
+                const guideId = guideRoot && guideRoot.id === 'guide-atlas' ? 'atlas' : 'nvivo';
+                showGuide(guideId, hashId);
+                return;
+            }
+            showGuide('nvivo');
+        });
+    </script>
+</body>
+</html>
