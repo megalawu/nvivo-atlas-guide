@@ -36,6 +36,38 @@
         .nav-link {
             transition: color 0.2s ease;
         }
+        .tab-btn {
+            border-radius: 0.75rem;
+            border: 1px solid rgba(229, 231, 235, 1);
+            background: rgba(255, 255, 255, 0.7);
+            color: rgba(55, 65, 81, 1);
+            transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease, color 0.15s ease;
+        }
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .tab-btn.tab-active {
+            background: linear-gradient(90deg, #2563eb 0%, #4f46e5 100%);
+            border-color: transparent;
+            color: #ffffff;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+        }
+        @media (min-width: 640px) {
+            .tab-btn {
+                border-radius: 0;
+                border: none;
+                background: transparent;
+            }
+            .tab-btn:hover {
+                background: transparent;
+            }
+            .tab-btn.tab-active {
+                background: transparent;
+                color: rgba(37, 99, 235, 1);
+                box-shadow: none;
+                border-bottom: 2px solid rgba(37, 99, 235, 1);
+            }
+        }
         header .nav-link {
             display: inline-flex;
             align-items: center;
@@ -373,9 +405,9 @@
             <div class="mb-8">
                 <div class="border-b border-gray-200">
                     <nav class="-mb-px flex flex-col sm:flex-row gap-2 sm:gap-6" aria-label="Tabs">
-                        <button onclick="switchTab('textSearch')" class="tab-btn w-full sm:w-1/3 py-3 sm:py-4 px-3 sm:px-1 text-center border-b-2 font-medium text-sm border-blue-500 text-blue-600 rounded-lg sm:rounded-none bg-blue-50 sm:bg-transparent" data-tab="textSearch">Text Search Query</button>
-                        <button onclick="switchTab('wordFrequency')" class="tab-btn w-full sm:w-1/3 py-3 sm:py-4 px-3 sm:px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 rounded-lg sm:rounded-none hover:bg-gray-50 sm:hover:bg-transparent" data-tab="wordFrequency">Word Frequency Query</button>
-                        <button onclick="switchTab('matrix')" class="tab-btn w-full sm:w-1/3 py-3 sm:py-4 px-3 sm:px-1 text-center border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 rounded-lg sm:rounded-none hover:bg-gray-50 sm:hover:bg-transparent" data-tab="matrix">Matrix Coding Query</button>
+                        <button onclick="switchTab('textSearch')" class="tab-btn tab-active w-full sm:w-1/3 py-3 sm:py-4 px-3 sm:px-1 text-center font-semibold text-sm" data-tab="textSearch" aria-selected="true">Text Search Query</button>
+                        <button onclick="switchTab('wordFrequency')" class="tab-btn w-full sm:w-1/3 py-3 sm:py-4 px-3 sm:px-1 text-center font-semibold text-sm" data-tab="wordFrequency" aria-selected="false">Word Frequency Query</button>
+                        <button onclick="switchTab('matrix')" class="tab-btn w-full sm:w-1/3 py-3 sm:py-4 px-3 sm:px-1 text-center font-semibold text-sm" data-tab="matrix" aria-selected="false">Matrix Coding Query</button>
                     </nav>
                 </div>
                 
@@ -920,8 +952,8 @@
             // Reset all tab buttons styling
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(btn => {
-                btn.classList.remove('border-blue-500', 'text-blue-600');
-                btn.classList.add('border-transparent', 'text-gray-500');
+                btn.classList.remove('tab-active');
+                btn.setAttribute('aria-selected', 'false');
             });
 
             // Show selected content
@@ -931,8 +963,8 @@
             // Highlight active button
             const activeBtn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
             if(activeBtn) {
-                activeBtn.classList.remove('border-transparent', 'text-gray-500');
-                activeBtn.classList.add('border-blue-500', 'text-blue-600');
+                activeBtn.classList.add('tab-active');
+                activeBtn.setAttribute('aria-selected', 'true');
             }
         }
 
